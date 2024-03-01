@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Details</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <main>
+        <section id="show-page">
+            <div>Airline: </div>
+            <div><%= flight.airline %></div>
+            <div>Airport: </div>
+            <div><%= flight.airport %></div>
+            <div>Flight Number: </div>
+            <div><%= flight.flightNo %></div>
+            <div>Departures: </div>
+            <div><%= flight.departs ? 'Yes' : 'No' %></div>
+        </section>
+
+        <br><br>
+        <h2>Destinations</h2>
+        <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
+        
+            <!--dynamic drop down menu-->
+            <label for="airport">Airport:</label>
+            <select name="airport" id="airport">
+                <% airportCodes.forEach(function(code) { %>
+                    <option value="<%= code %>"><%= code %></option>
+                <% }); %>
+            </select>
+                <label for="arrival">Arrival:</label>
+                <input type="datetime-local" name="arrival" id="arrival">
+                <input type="submit" value="Add Destination">
+            </form>
+            
+
+        <% if (flight.destinations && flight.destinations.length) { %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Arrival</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% flight.destinations.forEach(function(destination) { %>
+                        <tr>
+                            <td><%= destination.airport %></td>
+                            <td><%= destination.arrival ? new Date(destination.arrival).toLocaleString() : '' %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <h5>No Destinations Yet</h5>
+        <% } %>
+    </main>
+</body>
+</html>

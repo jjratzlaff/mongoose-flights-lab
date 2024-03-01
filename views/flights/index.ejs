@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>flights page!</title>
+</head>
+
+<body>
+	<h2>flight list</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>airline</th>
+				<th>airport</th>
+				<th>flightnumber</th>
+				<th>na</th>
+				<th>na</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- Write the line of EJS to iterate over movies using forEach -->
+			<% flightDocs.forEach(m => { %>
+			 
+		
+			<tr>
+				<td>
+					<%= m.airline %>
+				</td>
+				<td>
+					<%= m.airport %>
+				</td>
+				<td>
+					<%= m.flightNo %>
+				</td>
+				<td>
+		
+			<% }) %>
+			<tbody>
+				<% flightDocs.forEach(function(m) { %>
+				  <tr>
+					<td><%= m.title %></td>
+					<td><%= m.releaseYear %></td>
+					<td><a href="/flights/<%= m._id %>">DETAILS</a></td>
+				  </tr>
+				  <% }); %>
+				</tbody>
+		</tbody>
+	</table>
+
+</body>
+
+</html>
